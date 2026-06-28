@@ -29,7 +29,7 @@
 \documentclass[a0, 30pt, portrait, plainsections]{a0poster}
 \usepackage{multicol} % This is so we can have multiple columns of text side-by-side
 \columnsep=100pt      % This is the amount of white space between the columns in the poster
-\columnseprule=3pt    % This is the thickness of the black line between the columns in the poster
+\columnseprule=0pt
 \usepackage[svgnames]{xcolor} % Specify colors by their
                               % 'svgnames'. For a full list of all
                               % colors available see here:
@@ -56,14 +56,19 @@
 \usepackage{multirow}
 \usepackage{capt-of}
 \usepackage{array}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{0pt}
 
 \setlength{\fboxsep}{1cm}
 \setlength{\fboxrule}{0.3cm}
 
 \newcommand{\columntitle}[1]{{\color{NavyBlue}\Huge\textbf{#1}}}
-\newcommand{\boxtitle}[1]{{\color{NavyBlue}\Huge\textbf{#1}}}
+\newcommand{\titlebottomspace}{\par\vspace{0.45cm}}
+\newcommand{\boxtitle}[1]{{\color{NavyBlue}\Huge\textbf{#1}}\titlebottomspace}
 
-\newcommand{\boxsubtitle}[1]{{\color{uniSlightblue}\huge\textbf{#1}}}
+\newcommand{\boxsubtitle}[1]{{\color{uniSlightblue}\huge\textbf{#1}}\titlebottomspace}
 \definecolor{uniSlightblue}{RGB}{0,190,255}
 
 \makeatletter
@@ -94,31 +99,31 @@
   \vspace{.5cm}\\
   \Huge \color{Black} \textbf{From Post-Hoc Explanations to Inherent Interpretation}% Title
   \vspace{.5cm}\\
-  \huge \textbf{Zheng Lin, Gloria Galasso}\\[0.5cm] % Author(s)
-  \huge IMS, University of Stuttgart\\[0.4cm] % University/Organization
+  \huge \textbf{Zheng Lin, Gloria Galasso}\\[0.3cm] % Author(s)
+  \huge IMS, University of Stuttgart\\[0.2cm] % University/Organization
   \Large \texttt{st191859@ims.uni-stuttgart.de}\\
+  \Large \texttt{st190447@stud.uni-stuttgart.de}\\
 \end{minipage}
 %
 \begin{minipage}{0.25\linewidth}
   \includegraphics[width=15cm]{logo_red_text_left}\\
 \end{minipage}
-\vspace{1cm} % A bit of extra whitespace between the header and the poster content
+\vspace{0.3cm} % A bit of extra whitespace between the header and the poster content
 \LARGE \color{Black} % Set body text default to black
 
 %----------------------------------------------------------------------------------------
 
 \begin{multicols}{2} % This is how many columns your poster will be broken into. A portrait poster is generally split into 2 columns.
-
-
-%----------------------------------------------------------------------------------------
-%	INTRODUCTION
-%----------------------------------------------------------------------------------------
-\columnbreak
-\columntitle{Introduction}
+\begin{tikzpicture}[remember picture, overlay]
+  \coordinate (cols-top);
+  \draw[line width=3pt] (current page.north |- cols-top) -- ([yshift=2cm]current page.south);
+\end{tikzpicture}%
+\noindent
 \section{Introduction}
-\vspace{1cm}
-Speech-based models achieve high diagnostic performance for neurological and voice disorders, but their predictions are often difficult to interpret, limiting clinical adoption.
-\vspace{1cm}
+\boxtitle{Introduction}
+\noindent Speech-based models achieve high performance, but limited interpretability hinders clinical adoption.
+\vspace{0.1cm}
+
 \noindent
 \colorbox{yellow!10}{%
   \parbox{\dimexpr\linewidth-2\fboxsep}{%
@@ -131,7 +136,7 @@ Speech-based models achieve high diagnostic performance for neurological and voi
     \end{itemize}
   }%
 }
-\vspace{1cm}
+\vspace{0.2cm}
 
 %----------------------------------------------------------------------------------------
 %	Features
@@ -139,12 +144,11 @@ Speech-based models achieve high diagnostic performance for neurological and voi
 
 \section{From Symptoms to Features}
 \boxtitle{From Symptoms to Features}
-\vspace{1cm}
 \begin{center}
 \includegraphics[width=\linewidth]{figures/symptom_to_feature.png}
 \captionof{figure}{Measurable features from symptoms of three diseases\cite{10767227,xu2023dysarthria}}
 \end{center}
-\vspace{1cm}
+\vspace{0.15cm}
 %------------------------------------------------
 
 %----------------------------------------------------------------------------------------
@@ -152,32 +156,30 @@ Speech-based models achieve high diagnostic performance for neurological and voi
 %----------------------------------------------------------------------------------------
 \section{Post-Hoc Feature Attribution}
 \boxtitle{Post-Hoc Feature Attribution}
-\vspace{1cm}
 \subsection*{CNN + SHAP}
 \boxsubtitle{CNN + SHAP}
 \begin{center}
 \includegraphics[width=\linewidth]{figures/Dysarthria+SHAP.png}
 \captionof{figure}{Use SHAP values to illustrate how each feature affect model decision\cite{xu2023dysarthria}}
 \end{center}
-\vspace{1cm}
+\vspace{0.15cm}
 \subsection*{BERT + LIME}
 \boxsubtitle{BERT + LIME}
 \begin{center}
 \includegraphics[width=\linewidth]{figures/BERT+LIME02.jpg}
 \captionof{figure}{Label: Dementia, Prediction: Dementia\cite{Ilias_2022}}
 \end{center}
-\vspace{1cm}
+\vspace{0.15cm}
 
 %----------------------------------------------------------------------------------------
 %	Limitations
 %----------------------------------------------------------------------------------------
 \section{Limitations of Post-Hoc Methods}
 \boxtitle{Limitations of Post-Hoc Methods}
-\vspace{1cm}
 \begin{center}
-\begin{minipage}{\linewidth} 
-    \large 
-    \renewcommand{\arraystretch}{1.5} 
+\begin{minipage}{\linewidth}
+    \large
+    \renewcommand{\arraystretch}{1.3}
     \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{0.3\linewidth} |>{\raggedright\arraybackslash}X|} 
         \hline
         \textbf{Category} & \textbf{Description}\\ \hline
@@ -189,89 +191,91 @@ Speech-based models achieve high diagnostic performance for neurological and voi
     \captionof{table}{Drawbacks of post-hoc interpretation\cite{11371361}}
 \end{minipage}
 \end{center}
-\vspace{1cm}
+\vspace{0.15cm}
+
+\columnbreak
 
 %----------------------------------------------------------------------------------------
 %	Concept-based architectures
 %----------------------------------------------------------------------------------------
-\section{Beyond Black-Box: Predictions Through Clinical Concepts}
-\boxtitle{Beyond Black-Box: Predictions Through Clinical Concepts}
-\vspace{1cm}
-
-%----------------------------------------------------------------------------------------
-\subsection*{Concept Bottleneck Models \& Concept Embedding Models}
-\boxsubtitle{Concept Bottleneck Models \& Concept Embedding Models}
-\vspace{0.5cm}
-
-\begin{itemize}[leftmargin=1.5em]
-\item \textbf{CBM:} An explainable architecture with an intermediate clinical concept layer that drives final diagnostic classification.
-\item \textbf{CEM:} Embeddings for the active state and for the inactive state of the concept.
-\end{itemize}
-
-\begin{center}
-\includegraphics[width=0.75\linewidth]{figures/cbm_cem_architecture.png}
-\captionof{figure}{CBM vs.\ CEM\cite{ghia2025conceptbasedapproachvoicedisorder}.}
-\end{center}
-\vspace{1cm}
-
-%----------------------------------------------------------------------------------------
-\subsection*{Literature-Grounded Explanations (RAG)}
-\boxsubtitle{Literature-Grounded Explanations (RAG)}
-\vspace{0.5cm}
-
-RAG retrieves relevant medical literature before generating an explanation\cite{Ntampakis_2025}.
-
-\vspace{0.5cm}
-\begin{center}
+\section{From Post-hoc Explanations to Concept-Based Prediction}
+\boxtitle{From Post-hoc Explanations to Concept-Based Prediction}
+\noindent
 \colorbox{NavyBlue}{%
-  \Large\color{white}\,Prediction $\rightarrow$ Retrieve PubMed $\rightarrow$ LLM $\rightarrow$ Justification\,
+  \parbox{\dimexpr\linewidth-2\fboxsep}{%
+    \centering\Large\color{white}
+    Speech $\rightarrow$ Clinical Concepts $\rightarrow$ Diagnosis
+  }%
 }
+\vspace{0.08cm}
+
+\noindent Example applications: Binary classification of healthy vs. dysarthric speech \cite{xu2023dysarthria} and healthy vs. pathological voice \cite{ghia2025conceptbasedapproachvoicedisorder} through clinically meaningful concepts.
+\vspace{0.12cm}
+
+%----------------------------------------------------------------------------------------
+\subsection*{Concept-Based Prediction}
+\boxsubtitle{Concept-Based Prediction}
+
+\begin{center}
+\includegraphics[width=0.85\linewidth]{figures/dysarthria_image.png}
+\captionof{figure}{DNN architecture mapping speech to diagnosis through a concept bottleneck\cite{xu2023dysarthria}.}
 \end{center}
-\vspace{1cm}
+\vspace{0.1cm}
+
+\begin{center}
+\includegraphics[width=0.65\linewidth]{figures/cbm_framework.png}
+\captionof{figure}{Automatic concept annotation from clinical notes during training\cite{ghia2025conceptbasedapproachvoicedisorder}.}
+\end{center}
+\vspace{0.1cm}
+
+%----------------------------------------------------------------------------------------
+\subsection*{Concept Embedding Models (CEM)}
+\boxsubtitle{Concept Embedding Models (CEM)}
+
+\begin{center}
+\includegraphics[width=1.0\linewidth]{figures/cem_image.png}
+\captionof{figure}{CEM represents clinical concepts as active/inactive embedding pairs\cite{ghia2025conceptbasedapproachvoicedisorder}.}
+\end{center}
+\vspace{0.1cm}
 
 %----------------------------------------------------------------------------------------
 \subsection*{Results}
 \boxsubtitle{Results}
-\vspace{0.3cm}
 \begin{center}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{|l|r|r|}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{0.9\linewidth}{|>{\raggedright\arraybackslash}X
+                                |>{\centering\arraybackslash}p{0.22\linewidth}
+                                |>{\centering\arraybackslash}p{0.30\linewidth}|}
 \hline
-\textbf{Task} & \textbf{Black-box / Baseline} & \textbf{Explainable} \\ \hline
-Voice disorder & 91.3\% (Acc) & 87.8\% (Acc) \\ \hline
-Dysarthria & 82.5\% (Acc) & \textbf{83.9\%} (Acc) \\ \hline
-Mild Cognitive Impairment & 0.58 (AUC) & \textbf{0.62} (AUC) \\ \hline
-\end{tabular}
-\captionof{table}{Performance comparison of black-box and explainable models across clinical speech tasks\cite{ghia2025conceptbasedapproachvoicedisorder,xu2023dysarthria,1e0730b6d8ef423d89d5860c23834a1b}.}
+\textbf{Task} & \textbf{Black-box} & \textbf{Concept-based} \\ \hline
+Dysarthria & 82.5\% & \textbf{CBM: 83.9\%} \\ \hline
+Voice disorder & \textbf{91.3\%} & CBM: 87.8\% / CEM: 87.3\% \\ \hline
+\end{tabularx}
+\captionof{table}{Black-box vs.\ concept-based model accuracy\cite{ghia2025conceptbasedapproachvoicedisorder,xu2023dysarthria}.}
 \end{center}
+\vspace{0.1cm}
 
-\vspace{0.5cm}
+\noindent
+{\setlength{\fboxsep}{0.45cm}%
 \colorbox{yellow!10}{%
   \parbox{\dimexpr\linewidth-2\fboxsep}{%
     \LARGE
-    \textbf{\color{Black}Key Finding:} Explainable models remain competitive while improving transparency.
+    \textbf{\color{Black}Key Finding:} Concept-based approaches provide clinically meaningful and interpretable predictions while remaining competitive with black-box models.
   }%
-}
-\vspace{1cm}
+}}
+\vspace{0.05cm}
 
-\begin{tikzpicture}[remember picture, overlay]
-\node[anchor=south east, inner sep=0pt, xshift=-10mm, yshift=10mm]
-  at (current page.south east)
-  {\begin{minipage}{7cm}\centering
-   \includegraphics[width=5.6cm]{figures/references_qr.png}\\[3mm]
-   {\normalsize Scan for references}
-   \end{minipage}};
-\end{tikzpicture}
-
-%----------------------------------------------------------------------------------------
-
-\end{multicols}
+\begin{flushright}
+\includegraphics[width=3.0cm]{figures/references_qr.png}\\[-1mm]
+{\scriptsize Scan for references}
+\end{flushright}
 
 \nocite{*}
 \bibliographystyle{plain}
-{\color{white}\tiny\bibliography{poster}}
+\begingroup
+\setbox0=\vbox{\color{white}\tiny\bibliography{poster}}%
+\endgroup
+
+\end{multicols}
 
 \end{document}
-
-
-%% --- END OF FILE
