@@ -201,27 +201,18 @@ introduction text
 \vspace{1cm}
 
 %----------------------------------------------------------------------------------------
-\subsection*{Concept Bottleneck Models (CBM)}
-\boxsubtitle{Concept Bottleneck Models (CBM)}
+\subsection*{Concept Bottleneck Models \& Concept Embedding Models}
+\boxsubtitle{Concept Bottleneck Models \& Concept Embedding Models}
 \vspace{0.5cm}
 
-The model predicts named clinical symptoms before classifying ---
-at test time, only the audio model runs.
-
-%----------------------------------------------------------------------------------------
-\subsection*{From Binary Nodes to Embeddings: CEM}
-\boxsubtitle{From Binary Nodes to Embeddings: CEM}
-\vspace{0.5cm}
-
-CBM assigns one binary node per concept. CEM replaces it with
-an active/inactive embedding pair --- richer and equally
-interpretable.
+\begin{itemize}[leftmargin=1.5em]
+\item \textbf{CBM:} An explainable architecture with an intermediate clinical concept layer that drives final diagnostic classification.
+\item \textbf{CEM:} Embeddings for the active state and for the inactive state of the concept.
+\end{itemize}
 
 \begin{center}
 \includegraphics[width=0.75\linewidth]{figures/cbm_cem_architecture.png}
-\captionof{figure}{CBM vs.\ CEM: binary nodes vs.\ embedding pairs.
-Note: text serves opposite roles --- offline label generator (Ghia et al.)
-vs.\ live multimodal input (Leschly et al.)\cite{ghia2025conceptbasedapproachvoicedisorder, 1e0730b6d8ef423d89d5860c23834a1b}.}
+\captionof{figure}{CBM vs.\ CEM\cite{ghia2025conceptbasedapproachvoicedisorder}.}
 \end{center}
 \vspace{1cm}
 
@@ -230,14 +221,13 @@ vs.\ live multimodal input (Leschly et al.)\cite{ghia2025conceptbasedapproachvoi
 \boxsubtitle{Literature-Grounded Explanations (RAG)}
 \vspace{0.5cm}
 
-Predicted concepts retrieve peer-reviewed evidence and generate
-a clinician-readable report --- no post-hoc step needed.
+RAG retrieves relevant medical literature before generating an explanation\cite{Ntampakis_2025}.
 
+\vspace{0.5cm}
 \begin{center}
-\includegraphics[width=0.75\linewidth]{figures/neuroxvocal.png}
-\captionof{figure}{NeuroXVocal: concepts drive RAG retrieval
-from medical literature, producing evidence-grounded
-reports\cite{Ntampakis_2025}.}
+\colorbox{NavyBlue}{%
+  \Large\color{white}\,Prediction $\rightarrow$ Retrieve PubMed $\rightarrow$ LLM $\rightarrow$ Justification\,
+}
 \end{center}
 \vspace{1cm}
 
@@ -247,39 +237,33 @@ reports\cite{Ntampakis_2025}.}
 \vspace{0.5cm}
 
 \begin{center}
-\renewcommand{\arraystretch}{1.5}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{0.24\linewidth}
-                              |>{\raggedright\arraybackslash}X
-                              |>{\centering\arraybackslash}p{0.20\linewidth}|}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|r|r|}
 \hline
-\textbf{Task} & \textbf{Model} & \textbf{Score} \\ \hline
-\multirow{2}{*}{Voice disorder}
-  & HuBERT black-box    & 0.909 F1 \\
-  & CEM                 & 0.860 F1 \\ \hline
-\multirow{2}{*}{Dysarthria}
-  & Black-box CNN       & 82.5\% Acc \\
-  & + concept layer     & \textbf{83.9\%} Acc \\ \hline
-\multirow{2}{*}{MCI}
-  & Baseline            & 0.58 AUC \\
-  & + concept layer     & \textbf{0.62 AUC} \\ \hline
-Alzheimer's
-  & NeuroXVocal         & \textbf{0.958 F1} \\ \hline
-\end{tabularx}
-\captionof{table}{Concept-based models match or exceed
-black-box baselines across all four disorders.}
+\textbf{Task} & \textbf{Black-box} & \textbf{Explainable} \\ \hline
+Voice disorder & \textbf{91.3\%} & 87.8\% \\ \hline
+Dysarthria & 82.5\% & \textbf{83.9\%} \\ \hline
+Alzheimer's & $<$95.8\% & \textbf{95.8\% (SOTA)} \\ \hline
+\end{tabular}
+\captionof{table}{Performance comparison of black-box and explainable models across clinical speech tasks\cite{ghia2025conceptbasedapproachvoicedisorder,xu2023dysarthria,Ntampakis_2025}.}
 \end{center}
 
 \vspace{0.5cm}
 \colorbox{yellow!10}{%
   \parbox{\dimexpr\linewidth-2\fboxsep}{%
     \LARGE
-    \textbf{\color{Black}Key Finding:} Concept-based models
-    predict \textit{through} clinical symptoms ---
-    accurate, transparent, no post-hoc approximation.
+    \textbf{\color{Black}Key Finding:} Interpretability does not necessarily come at the cost of accuracy. Concept-based models often match or exceed black-box performance while providing transparent clinical reasoning.
   }%
 }
 \vspace{1cm}
 
+
+%----------------------------------------------------------------------------------------
+
+\vspace{+3mm}
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{poster}
 
 %----------------------------------------------------------------------------------------
 
