@@ -117,9 +117,7 @@
 \columntitle{Introduction}
 \section{Introduction}
 \vspace{1cm}
-\begin{center}
-introduction text
-\end{center}
+Speech-based models achieve high diagnostic performance for neurological and voice disorders, but their predictions are often difficult to interpret, limiting clinical adoption.
 \vspace{1cm}
 \noindent
 \colorbox{yellow!10}{%
@@ -234,43 +232,44 @@ RAG retrieves relevant medical literature before generating an explanation\cite{
 %----------------------------------------------------------------------------------------
 \subsection*{Results}
 \boxsubtitle{Results}
-\vspace{0.5cm}
-
+\vspace{0.3cm}
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{|l|r|r|}
 \hline
-\textbf{Task} & \textbf{Black-box} & \textbf{Explainable} \\ \hline
-Voice disorder & \textbf{91.3\%} & 87.8\% \\ \hline
-Dysarthria & 82.5\% & \textbf{83.9\%} \\ \hline
-Alzheimer's & $<$95.8\% & \textbf{95.8\% (SOTA)} \\ \hline
+\textbf{Task} & \textbf{Black-box / Baseline} & \textbf{Explainable} \\ \hline
+Voice disorder & 91.3\% (Acc) & 87.8\% (Acc) \\ \hline
+Dysarthria & 82.5\% (Acc) & \textbf{83.9\%} (Acc) \\ \hline
+Mild Cognitive Impairment & 0.58 (AUC) & \textbf{0.62} (AUC) \\ \hline
 \end{tabular}
-\captionof{table}{Performance comparison of black-box and explainable models across clinical speech tasks\cite{ghia2025conceptbasedapproachvoicedisorder,xu2023dysarthria,Ntampakis_2025}.}
+\captionof{table}{Performance comparison of black-box and explainable models across clinical speech tasks\cite{ghia2025conceptbasedapproachvoicedisorder,xu2023dysarthria,1e0730b6d8ef423d89d5860c23834a1b}.}
 \end{center}
 
 \vspace{0.5cm}
 \colorbox{yellow!10}{%
   \parbox{\dimexpr\linewidth-2\fboxsep}{%
     \LARGE
-    \textbf{\color{Black}Key Finding:} Interpretability does not necessarily come at the cost of accuracy. Concept-based models often match or exceed black-box performance while providing transparent clinical reasoning.
+    \textbf{\color{Black}Key Finding:} Explainable models remain competitive while improving transparency.
   }%
 }
 \vspace{1cm}
 
-
-%----------------------------------------------------------------------------------------
-
-\vspace{+3mm}
-\nocite{*}
-\bibliographystyle{plain}
-\bibliography{poster}
+\begin{tikzpicture}[remember picture, overlay]
+\node[anchor=south east, inner sep=0pt, xshift=-10mm, yshift=10mm]
+  at (current page.south east)
+  {\begin{minipage}{7cm}\centering
+   \includegraphics[width=5.6cm]{figures/references_qr.png}\\[3mm]
+   {\normalsize Scan for references}
+   \end{minipage}};
+\end{tikzpicture}
 
 %----------------------------------------------------------------------------------------
 
 \end{multicols}
 
-\vfill
-\hfill\includegraphics[width=4cm]{figures/references_qr.png}
+\nocite{*}
+\bibliographystyle{plain}
+{\color{white}\tiny\bibliography{poster}}
 
 \end{document}
 
