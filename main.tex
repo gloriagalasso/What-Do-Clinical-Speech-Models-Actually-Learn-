@@ -205,38 +205,8 @@ introduction text
 \boxsubtitle{Concept Bottleneck Models (CBM)}
 \vspace{0.5cm}
 
-The model predicts named clinical symptoms before classifying.
-An LLM (Gemini-pro) annotates training data from unstructured
-medical notes --- at test time, only the audio model runs.
-
-\begin{center}
-\includegraphics[width=\linewidth]{figures/cbm_framework.png}
-\captionof{figure}{Audio mapped through a clinical concept layer
-before prediction. LLM used at training only
-(dashed)\cite{ghia2025conceptbasedapproachvoicedisorder}.}
-\end{center}
-\vspace{0.5cm}
-
-\begin{center}
-\renewcommand{\arraystretch}{1.5}
-\begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{0.25\linewidth}
-                              |>{\raggedright\arraybackslash}X
-                              |>{\raggedright\arraybackslash}X|}
-\hline
-\textbf{Dimension} & \textbf{Ghia et al. \cite{ghia2025conceptbasedapproachvoicedisorder}} & \textbf{Leschly et al. \cite{1e0730b6d8ef423d89d5860c23834a1b}} \\ \hline
-\textbf{Role of Text}
-  & \textbf{Training phase only:} LLM extracts clean target labels from unstructured notes offline\cite{ghia2025conceptbasedapproachvoicedisorder}.
-  & \textbf{Live test input:} Transcribed words are converted to BERT embeddings during execution\cite{1e0730b6d8ef423d89d5860c23834a1b}. \\ \hline
-\textbf{Inference Input}
-  & \textbf{Audio only:} Discards text at test time; relies strictly on HuBERT speech encoder\cite{ghia2025conceptbasedapproachvoicedisorder}.
-  & \textbf{Multimodal fusion:} Requires both raw speech (wav2vec 2.0) and text (BERT) streams\cite{1e0730b6d8ef423d89d5860c23834a1b}. \\ \hline
-\textbf{Concept Targets}
-  & \textbf{Vocal acoustics:} Evaluates physical sound quality (e.g., breathiness, roughness, strain)\cite{ghia2025conceptbasedapproachvoicedisorder}.
-  & \textbf{Patient symptoms:} Tracks holistic functional complaints (e.g., pain, gait decline, tremors)\cite{1e0730b6d8ef423d89d5860c23834a1b}. \\ \hline
-\end{tabularx}
-\captionof{table}{Text serves fundamentally opposite roles across concept-based diagnostic frameworks.}
-\end{center}
-\vspace{1cm}
+The model predicts named clinical symptoms before classifying ---
+at test time, only the audio model runs.
 
 %----------------------------------------------------------------------------------------
 \subsection*{From Binary Nodes to Embeddings: CEM}
@@ -248,9 +218,10 @@ an active/inactive embedding pair --- richer and equally
 interpretable.
 
 \begin{center}
-\includegraphics[width=\linewidth]{figures/cbm_cem_architecture.png}
-\captionof{figure}{CBM vs.\ CEM: binary nodes vs.\
-embedding pairs per vocal concept\cite{ghia2025conceptbasedapproachvoicedisorder}.}
+\includegraphics[width=0.75\linewidth]{figures/cbm_cem_architecture.png}
+\captionof{figure}{CBM vs.\ CEM: binary nodes vs.\ embedding pairs.
+Note: text serves opposite roles --- offline label generator (Ghia et al.)
+vs.\ live multimodal input (Leschly et al.)\cite{ghia2025conceptbasedapproachvoicedisorder, 1e0730b6d8ef423d89d5860c23834a1b}.}
 \end{center}
 \vspace{1cm}
 
@@ -263,7 +234,7 @@ Predicted concepts retrieve peer-reviewed evidence and generate
 a clinician-readable report --- no post-hoc step needed.
 
 \begin{center}
-\includegraphics[width=\linewidth]{figures/neuroxvocal.png}
+\includegraphics[width=0.75\linewidth]{figures/neuroxvocal.png}
 \captionof{figure}{NeuroXVocal: concepts drive RAG retrieval
 from medical literature, producing evidence-grounded
 reports\cite{Ntampakis_2025}.}
@@ -311,21 +282,11 @@ black-box baselines across all four disorders.}
 
 
 %----------------------------------------------------------------------------------------
-%	REFERENCES
-%----------------------------------------------------------------------------------------
-
-\boxtitle{References}
-\vspace{0.5cm}
-
-\begin{center}
-\includegraphics[width=0.45\linewidth]{figures/references_qr.png}\\[0.5cm]
-\Large Scan for the full reference list\\
-\url{https://github.com/gloriagalasso/What-Do-Clinical-Speech-Models-Actually-Learn-}
-\end{center}
-
-%----------------------------------------------------------------------------------------
 
 \end{multicols}
+
+\vfill
+\hfill\includegraphics[width=4cm]{figures/references_qr.png}
 
 \end{document}
 
